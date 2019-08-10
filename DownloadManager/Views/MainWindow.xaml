@@ -1,0 +1,99 @@
+﻿<Window x:Class="DownloadManager.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DownloadManager.Views"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        MinHeight="450"
+        MinWidth="800"
+        Title="EZDownload" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" Height="25" VerticalAlignment="Top">
+            <MenuItem Header="File">
+                <MenuItem Width="250" Header="Add new download" Command="{Binding AddDownloadCommand}"/>
+                <MenuItem Width="250" Header="Add new download(with selecting saving folder)" Command="{Binding AddDownloadWithSelect}"/>
+            </MenuItem>
+            <MenuItem Header="Settings">
+                <MenuItem Width="250">
+                    <MenuItem.Header>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="Change default downlad folder"/>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                <TextBox Text="{Binding DefaultPath}" Width="100" IsEnabled="False"/>
+                                <Button Command="{Binding BrowseCommand}" Content="Browse"/>
+                            </StackPanel>
+                        </Grid>
+                    </MenuItem.Header>
+                </MenuItem>
+                <MenuItem IsCheckable="True" IsChecked="{Binding AllowSpeed}" Header="Allow speed limit"/>
+                <MenuItem>
+                    <MenuItem.Header>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="Max downloads"/>
+                            <TextBox Text="{Binding MaxDownloads}" Grid.Row="1"/>
+
+                        </Grid>
+                    </MenuItem.Header>
+                </MenuItem>
+                
+            </MenuItem>
+        </Menu>
+
+        <Grid Grid.Row="1" Margin="0 10 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Menu VerticalAlignment="Top" Height="40">
+                <MenuItem Padding="5" Command="{Binding AddDownloadCommand}">
+                    <MenuItem.Header>
+                        <TextBlock VerticalAlignment="Center" FontWeight="Bold" FontSize="18" Text="+"/>
+                    </MenuItem.Header>
+                </MenuItem>
+                <MenuItem Padding="5" Margin="10 0 0 0" Command="{Binding DeleteDownloadCommand}">
+                    <MenuItem.Header>
+                        <Image Height="30" Source="../Resources/trash.png"/>
+                    </MenuItem.Header>
+                </MenuItem>
+                <MenuItem Padding="5" Margin="10 0 0 0" Command="{Binding PauseDownloadCommand}">
+                    <MenuItem.Header>
+                        <Image Source="../Resources/pause.png"/>
+                    </MenuItem.Header>
+                </MenuItem>
+                <MenuItem Padding="5" Margin="10 0 0 0" Command="{Binding StartDownloadCommand}">
+                    <MenuItem.Header>
+                        <Image Source="../Resources/download.png"/>
+                    </MenuItem.Header>
+                </MenuItem>
+            </Menu>
+
+            <DataGrid ItemsSource="{Binding Downloads}" SelectedItem="{Binding SelectedItem}" Grid.Row="1" AutoGenerateColumns="False" ColumnWidth="*">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="File name" Binding="{Binding FileName}"/>
+                    <DataGridTextColumn Header="File size" Binding="{Binding FileSizeString}"/>
+                    <DataGridTextColumn Header="Downloaded size" Binding="{Binding DownloadedSizeString}"/>
+                    <DataGridTextColumn Header="Progress" Binding="{Binding Progress}"/>
+                    <DataGridTextColumn Header="Download speed" Binding="{Binding DownloadSpeed}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Window>
