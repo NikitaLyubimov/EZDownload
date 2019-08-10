@@ -1,20 +1,18 @@
 ﻿using System.Windows.Input;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using System;
+using System.ComponentModel;
+using System.Xml.Linq;
+using System.Collections.Generic;
+using System.Linq;
 
 using DownloadManager.Commands;
 using DownloadManager.Views;
 using DownloadManager.Download;
 using DownloadManager.Properties;
-using System.ComponentModel;
-using System.Xml.Serialization;
-using System.Xml.Linq;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+
 
 namespace DownloadManager.ViewModels
 {
@@ -67,6 +65,7 @@ namespace DownloadManager.ViewModels
         public MainWindowViewModel()
         {
             DeserializeDownloads();
+            
             
 
             Downloads = Download.DownloadManager.Instance.DownloadList;
