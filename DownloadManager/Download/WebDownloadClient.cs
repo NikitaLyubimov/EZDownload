@@ -867,21 +867,5 @@ namespace DownloadManager.Download
         }
 
         #endregion
-
-        #region Serialize and desirealize options
-
-        [OnSerializing()]
-        internal void OnSerialingMethod(StreamingContext context)
-        {
-            DownloadThread = null;
-        }
-
-        [OnDeserializing()]
-        internal void OnDeserializingMethod(StreamingContext context)
-        {
-            DownloadThread = new Thread(new ThreadStart(DownloadFile));
-        }
-
-        #endregion
     }
 }
